@@ -1,0 +1,31 @@
+# This is a sample plugin.yml
+# For more infomration refer to http://wiki.bukkit.org/Plugin_YAML
+main: edu.neu.css.edpoon.bukkit.samplehome.SimplyHome
+name: ${project.name}
+version: ${project.version}
+author: SagaciousZed
+description: ${project.description}
+commands:
+  home:
+    description: Sends the player to their home location.
+    usage: 'set a home first by using /sethome'
+    permission: samplehome.home
+  sethome:
+    description: Sets the player's home location.
+    usage: /<command>
+    permission: samplehome.sethome
+  clearhome:
+    description: Clears the player's home location.
+    usage: /<command>
+    permission: samplehome.clearhome
+permissions:
+  samplehome.*:
+    description: gives all permissions of the SamplePlugin
+    default: true
+    children:
+      samplehome.home:
+        description: Gives permission to send themselves home.
+      samplehome.set:
+        description: Gives permission to set their a home.
+      samplehome.clear:
+        description: Give permission to clear their home.
