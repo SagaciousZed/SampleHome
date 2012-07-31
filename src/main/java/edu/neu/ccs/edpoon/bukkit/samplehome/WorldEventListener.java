@@ -1,4 +1,4 @@
-package edu.neu.css.edpoon.bukkit.samplehome;
+package edu.neu.ccs.edpoon.bukkit.samplehome;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

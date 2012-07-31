@@ -1,4 +1,4 @@
-package edu.neu.css.edpoon.bukkit.samplehome.commands;
+package edu.neu.ccs.edpoon.bukkit.samplehome.commands;
 
 import java.text.MessageFormat;
 
@@ -7,8 +7,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import edu.neu.css.edpoon.bukkit.samplehome.ConfigurationSerializableLocation;
-import edu.neu.css.edpoon.bukkit.samplehome.SimplyHome;
+import edu.neu.ccs.edpoon.bukkit.samplehome.ConfigurationSerializableLocation;
+import edu.neu.ccs.edpoon.bukkit.samplehome.SimplyHome;
 
 /**
  * Implements the SetHome command. This command sets the player home in the configuration.

@@ -1,6 +1,6 @@
 # This is a sample plugin.yml
 # For more infomration refer to http://wiki.bukkit.org/Plugin_YAML
-main: edu.neu.css.edpoon.bukkit.samplehome.SimplyHome
+main: edu.neu.ccs.edpoon.bukkit.samplehome.SimplyHome
 name: ${project.name}
 version: ${project.version}
 author: SagaciousZed

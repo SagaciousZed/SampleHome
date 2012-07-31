@@ -1,4 +1,4 @@
-package edu.neu.css.edpoon.bukkit.samplehome;
+package edu.neu.ccs.edpoon.bukkit.samplehome;
 
 import java.util.HashMap;
 import java.util.Map;
