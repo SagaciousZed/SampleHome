@@ -1,4 +1,4 @@
-package edu.neu.ccs.edpoon.bukkit.samplehome;
+package com.sagaciouszed.bukkit;
 
 import java.util.HashMap;
 import java.util.Map;

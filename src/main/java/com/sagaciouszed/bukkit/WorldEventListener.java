@@ -1,4 +1,4 @@
-package edu.neu.ccs.edpoon.bukkit.samplehome;
+package com.sagaciouszed.bukkit;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

@@ -1,4 +1,4 @@
-package edu.neu.ccs.edpoon.bukkit.samplehome.commands;
+package com.sagaciouszed.bukkit.commands;
 
 import java.text.MessageFormat;
 
@@ -7,8 +7,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import edu.neu.ccs.edpoon.bukkit.samplehome.ConfigurationSerializableLocation;
-import edu.neu.ccs.edpoon.bukkit.samplehome.SimplyHome;
+import com.sagaciouszed.bukkit.ConfigurationSerializableLocation;
+import com.sagaciouszed.bukkit.SimplyHome;
+
 
 /**
  * This class implements the Home Command. The home command send the sender home

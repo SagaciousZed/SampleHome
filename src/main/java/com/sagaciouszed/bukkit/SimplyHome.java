@@ -1,11 +1,12 @@
-package edu.neu.ccs.edpoon.bukkit.samplehome;
+package com.sagaciouszed.bukkit;
 
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import edu.neu.ccs.edpoon.bukkit.samplehome.commands.ClearCommandExecutor;
-import edu.neu.ccs.edpoon.bukkit.samplehome.commands.HomeCommandExecutor;
-import edu.neu.ccs.edpoon.bukkit.samplehome.commands.SetCommandExecutor;
+import com.sagaciouszed.bukkit.commands.ClearCommandExecutor;
+import com.sagaciouszed.bukkit.commands.HomeCommandExecutor;
+import com.sagaciouszed.bukkit.commands.SetCommandExecutor;
+
 
 /**
  * This is the main class of the plugin SimplyHome. This plugin has a very
