@@ -1,15 +1,39 @@
+/*
+ * Copyright (C) 2012
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy 
+ * of this software and associated documentation files (the "Software"), to deal 
+ * in the Software without restriction, including without limitation the rights 
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
+ * copies of the Software, and to permit persons to whom the Software is 
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE 
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+ * SOFTWARE.
+ */
 package com.sagaciouszed.bukkit;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
 /**
- * This class is a ConfigurationSerializable version of Location. It does not 
+ * This class is a ConfigurationSerializable version of Location. It does not
  * serialize World which must be resolved the location is needed.
  */
 public final class ConfigurationSerializableLocation implements ConfigurationSerializable {
@@ -27,11 +51,15 @@ public final class ConfigurationSerializableLocation implements ConfigurationSer
     private final double z;
     private final float yaw;
     private final float pitch;
-    private transient Location loc;
+
+    private transient WeakReference<Location> weakLoc;
 
     /**
-     * Constructs a ConfigurationSerializableLocation with the information of the given Location.
-     * @param l Location to be serialized
+     * Constructs a ConfigurationSerializableLocation with the information of
+     * the given Location.
+     * 
+     * @param l
+     *            Location to be serialized
      */
     public ConfigurationSerializableLocation(Location l) {
         this.world = l.getWorld().getName();
@@ -44,10 +72,13 @@ public final class ConfigurationSerializableLocation implements ConfigurationSer
     }
 
     /**
-     * Constructs a ConfigurationSerializableLocation with the given Information. This constructor
-     * is meant to be used if ConfigurationSerializableLocation is serialized in another
+     * Constructs a ConfigurationSerializableLocation with the given
+     * Information. This constructor
+     * is meant to be used if ConfigurationSerializableLocation is serialized in
+     * another
      * ConfigurationSerializable class.
-     * @param map 
+     * 
+     * @param map
      */
     public ConfigurationSerializableLocation(Map<String, Object> map) {
         this.world = (String) map.get("world");
@@ -60,10 +91,11 @@ public final class ConfigurationSerializableLocation implements ConfigurationSer
     }
 
     /**
-     * Restores from a map back into the class. Used with bukkit's 
+     * Restores from a map back into the class. Used with bukkit's
      * ConfigurationSerializable.
      * 
-     * @param map a Map which represents a ConfigurationSerializableLocation
+     * @param map
+     *            a Map which represents a ConfigurationSerializableLocation
      * @return A ConfigurationSerializableLocation
      */
     public static ConfigurationSerializableLocation deserialize(Map<String, Object> map) {
@@ -71,8 +103,10 @@ public final class ConfigurationSerializableLocation implements ConfigurationSer
     }
 
     /**
-     * Serialize this ConfigurationSerializableLocation into a Map which contain the values of
+     * Serialize this ConfigurationSerializableLocation into a Map which contain
+     * the values of
      * this class
+     * 
      * @return Map<String, Object>
      */
     public final Map<String, Object> serialize() {
@@ -90,18 +124,20 @@ public final class ConfigurationSerializableLocation implements ConfigurationSer
     /**
      * Resolves the World on the Server, as a proper location has a reference to
      * the world it belongs to.
-     * @param server The server which the map is on
+     * 
+     * @param server
+     *            The server which the map is on
      * @return Location represented
      */
-    public final Location getLocation(Server server) {
-        if (loc == null) {
-            World world = server.getWorld(this.uuid);
-            if (world == null){
+    public final Location getLocation() {
+        if (weakLoc == null || weakLoc.get() == null) {
+            World world = Bukkit.getWorld(this.uuid);
+            if (world == null) {
                 Logger.getLogger(this.getClass().getName()).warning("World UUID not found, falling back to World Name");
-                world = server.getWorld(this.world);
+                world = Bukkit.getWorld(this.world);
             }
-            loc = new Location(world, x, y, z, yaw, pitch);
+            weakLoc = new WeakReference<Location>(new Location(world, x, y, z, yaw, pitch));
         }
-        return loc;
+        return weakLoc.get();
     }
 }

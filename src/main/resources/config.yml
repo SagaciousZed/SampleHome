@@ -1,0 +1,7 @@
+# Config file for SampleHome
+
+# limit the rate which you can teleport home.
+limit-home: true
+
+# The time that needs to pass before you are allowed to teleport home again.
+limit-interval-millis: 30000

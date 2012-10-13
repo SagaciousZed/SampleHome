@@ -1,5 +1,8 @@
 package com.sagaciouszed.bukkit.commands;
 
+import gnu.trove.map.TObjectLongMap;
+import gnu.trove.map.hash.TObjectLongHashMap;
+
 import java.text.MessageFormat;
 
 import org.bukkit.command.Command;
@@ -10,7 +13,6 @@ import org.bukkit.entity.Player;
 import com.sagaciouszed.bukkit.ConfigurationSerializableLocation;
 import com.sagaciouszed.bukkit.SimplyHome;
 
-
 /**
  * This class implements the Home Command. The home command send the sender home
  * if the sender has one. If not it will notify the sender to set a home.
@@ -18,21 +20,36 @@ import com.sagaciouszed.bukkit.SimplyHome;
 public class HomeCommandExecutor implements CommandExecutor {
 
     private final SimplyHome plugin;
+    private final TObjectLongMap<String> lastTeleport = new TObjectLongHashMap<String>();
 
+    /*
+     * This command needs to know which plugin it came from
+     */
     public HomeCommandExecutor(SimplyHome plugin) {
         this.plugin = plugin;
+        plugin.getCommand("home");
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             final Player p = (Player) sender;
-            final ConfigurationSerializableLocation home = (ConfigurationSerializableLocation) this.plugin.getConfig().get(p.getName());
+            final ConfigurationSerializableLocation home = (ConfigurationSerializableLocation) this.plugin.getHomesAccessor().getConfig().get(p.getName());
+            
+            // check if they have teleported recently
+            if (plugin.getConfig().getBoolean("limit-home")) {
+                if (lastTeleport.containsKey(p.getName()) &&
+                        lastTeleport.get(p.getName()) + plugin.getConfig().getLong("limit-interval-millis") > System.currentTimeMillis()) {
+                    p.sendMessage("You cannot teleport home again so soon.");
+                    return true;
+                }
+            }
+            
             if (home != null) {
-                p.teleport(home.getLocation(this.plugin.getServer()));
-                
+                p.teleport(home.getLocation());
                 p.sendMessage("You have been sent home");
-                plugin.getLogger().fine(MessageFormat.format("{0} teleported home", p.getName()));
+                this.plugin.getLogger().fine(MessageFormat.format("{0} teleported home", p.getName()));
+                this.lastTeleport.put(p.getName(), System.currentTimeMillis());
             } else {
                 return false;
             }

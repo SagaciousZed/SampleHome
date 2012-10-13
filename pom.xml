@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.sagaciouszed.bukkit</groupId>
@@ -24,7 +27,7 @@
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
       <!-- Bukkit API Version, change if out dated -->
-      <version>1.2.5-R4.1-SNAPSHOT</version>
+      <version>1.3.2-R1.0</version>
       <type>jar</type>
       <scope>provided</scope>
     </dependency>
@@ -44,6 +47,13 @@
       <type>jar</type>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>net.sf.trove4j</groupId>
+      <artifactId>trove4j</artifactId>
+      <version>3.0.3</version>
+      <type>jar</type>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -60,7 +70,7 @@
         <directory>src/main/resources</directory>
         <filtering>false</filtering>
         <excludes>
-            <exclude>plugin.yml</exclude>
+          <exclude>plugin.yml</exclude>
         </excludes>
       </resource>
     </resources>
@@ -74,6 +84,19 @@
           <source>1.6</source>
           <target>1.6</target>
         </configuration>
+      </plugin>
+<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
