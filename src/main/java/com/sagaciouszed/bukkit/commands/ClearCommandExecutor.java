@@ -18,7 +18,6 @@ public class ClearCommandExecutor implements CommandExecutor {
      */
     public ClearCommandExecutor(SimplyHome plugin) {
         this.plugin = plugin;
-        plugin.getCommand("clearhome").setExecutor(this);
     }
 
     @Override

@@ -36,10 +36,9 @@ public class SimplyHome extends JavaPlugin {
         new WorldEventListener(this);
         
         // Create CommandExecutors
-        new HomeCommandExecutor(this);
-        new SetCommandExecutor(this);
-        new ClearCommandExecutor(this);
-        
+        this.getCommand("home").setExecutor(new HomeCommandExecutor(this));
+        this.getCommand("clearhome").setExecutor(new ClearCommandExecutor(this));
+        this.getCommand("sethome").setExecutor(new SetCommandExecutor(this));        
     }
     
     @Override

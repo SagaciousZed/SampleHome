@@ -24,7 +24,6 @@ public class SetCommandExecutor implements CommandExecutor {
      */
     public SetCommandExecutor(SimplyHome plugin) {
         this.plugin = plugin;
-        plugin.getCommand("sethome");
     }
 
     @Override

@@ -27,7 +27,6 @@ public class HomeCommandExecutor implements CommandExecutor {
      */
     public HomeCommandExecutor(SimplyHome plugin) {
         this.plugin = plugin;
-        plugin.getCommand("home");
     }
 
     @Override
