@@ -7,16 +7,16 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.sagaciouszed.bukkit.SimplyHome;
+import com.sagaciouszed.bukkit.SampleHome;
 
 
 public class ClearCommandExecutor implements CommandExecutor {
-    private final SimplyHome plugin;
+    private final SampleHome plugin;
 
     /*
      * This command needs to know which plugin it came from
      */
-    public ClearCommandExecutor(SimplyHome plugin) {
+    public ClearCommandExecutor(SampleHome plugin) {
         this.plugin = plugin;
     }
 

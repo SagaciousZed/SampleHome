@@ -1,6 +1,6 @@
 # This is a sample plugin.yml
 # For more infomration refer to http://wiki.bukkit.org/Plugin_YAML
-main: com.sagaciouszed.bukkit.SimplyHome
+main: com.sagaciouszed.bukkit.SampleHome
 name: ${project.name}
 version: ${project.version}
 author: SagaciousZed

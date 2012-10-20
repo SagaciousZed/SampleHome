@@ -17,7 +17,7 @@ import com.sagaciouszed.bukkit.commands.SetCommandExecutor;
  * Configuration API. SimplyHome is unique in that respect as it stores Location
  * in a ConfigurationSerilizable class.
  */
-public class SimplyHome extends JavaPlugin {
+public class SampleHome extends JavaPlugin {
     
     private ConfigAccessor homesAccessor;
     

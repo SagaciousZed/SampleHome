@@ -11,7 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.sagaciouszed.bukkit.ConfigurationSerializableLocation;
-import com.sagaciouszed.bukkit.SimplyHome;
+import com.sagaciouszed.bukkit.SampleHome;
 
 /**
  * This class implements the Home Command. The home command send the sender home
@@ -19,13 +19,13 @@ import com.sagaciouszed.bukkit.SimplyHome;
  */
 public class HomeCommandExecutor implements CommandExecutor {
 
-    private final SimplyHome plugin;
+    private final SampleHome plugin;
     private final TObjectLongMap<String> lastTeleport = new TObjectLongHashMap<String>();
 
     /*
      * This command needs to know which plugin it came from
      */
-    public HomeCommandExecutor(SimplyHome plugin) {
+    public HomeCommandExecutor(SampleHome plugin) {
         this.plugin = plugin;
     }
 

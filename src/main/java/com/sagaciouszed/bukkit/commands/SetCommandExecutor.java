@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.sagaciouszed.bukkit.ConfigurationSerializableLocation;
-import com.sagaciouszed.bukkit.SimplyHome;
+import com.sagaciouszed.bukkit.SampleHome;
 
 
 /**
@@ -17,12 +17,12 @@ import com.sagaciouszed.bukkit.SimplyHome;
  */
 public class SetCommandExecutor implements CommandExecutor {
 
-    private final SimplyHome plugin;
+    private final SampleHome plugin;
 
     /*
      * This CommandExecutor needs to know the plugin it came from
      */
-    public SetCommandExecutor(SimplyHome plugin) {
+    public SetCommandExecutor(SampleHome plugin) {
         this.plugin = plugin;
     }
 
