@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.sagaciouszed.bukkit.Home;
 import com.sagaciouszed.bukkit.SampleHome;
 
 
@@ -23,9 +24,16 @@ public class ClearCommandExecutor implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            this.plugin.getHomesAccessor().getConfig().set(sender.getName(), null);
-            this.plugin.getLogger().fine(MessageFormat.format("{0} cleared a home", sender.getName()));
-            sender.sendMessage("You have cleared your home.");
+            final Player p = (Player) sender;
+            
+            // Search to see if it is in the database then drop it.
+            Home home = this.plugin.getDatabase().find(Home.class, p.getName());
+            if (home != null) {
+                this.plugin.getDatabase().delete(home);
+
+                this.plugin.getLogger().fine(MessageFormat.format("{0} cleared a home", sender.getName()));
+                sender.sendMessage("You have cleared your home.");
+            }
         } else {
             sender.sendMessage("You must be a player to have a home");
         }

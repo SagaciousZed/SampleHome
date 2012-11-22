@@ -5,6 +5,7 @@ name: ${project.name}
 version: ${project.version}
 author: SagaciousZed
 description: ${project.description}
+database: true
 commands:
   home:
     description: Sends the player to their home location.
