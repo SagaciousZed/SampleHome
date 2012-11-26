@@ -40,6 +40,13 @@
             <goals>
               <goal>shade</goal>
             </goals>
+            <configuration>
+              <artifactSet>
+                <includes>
+                  <include>net.sf.trove4j:trove4j</include>
+                </includes>
+              </artifactSet>
+            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -55,7 +62,7 @@
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
-      <version>1.4.5-R0.2</version>
+      <version>1.3.2-R1.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

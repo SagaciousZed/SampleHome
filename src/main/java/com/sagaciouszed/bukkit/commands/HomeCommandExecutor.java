@@ -10,8 +10,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.sagaciouszed.bukkit.Home;
-import com.sagaciouszed.bukkit.HomeLocationFactory;
+import com.sagaciouszed.bukkit.ConfigurationSerializableLocation;
 import com.sagaciouszed.bukkit.SampleHome;
 
 /**
@@ -34,6 +33,7 @@ public class HomeCommandExecutor implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             final Player p = (Player) sender;
+            final ConfigurationSerializableLocation home = (ConfigurationSerializableLocation) this.plugin.getHomesAccessor().getConfig().get(p.getName());
             
             // check if they have teleported recently
             if (plugin.getConfig().getBoolean("limit-home")) {
@@ -44,12 +44,10 @@ public class HomeCommandExecutor implements CommandExecutor {
                 }
             }
             
-            Home home = plugin.getDatabase().find(Home.class, p.getName());
             if (home != null) {
-                p.teleport(HomeLocationFactory.getLocation(home));
+                p.teleport(home.getLocation());
                 p.sendMessage("You have been sent home");
                 this.plugin.getLogger().fine(MessageFormat.format("{0} teleported home", p.getName()));
-                // update when the player was last teleported
                 this.lastTeleport.put(p.getName(), System.currentTimeMillis());
             } else {
                 return false;
