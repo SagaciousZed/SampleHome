@@ -28,7 +28,6 @@ import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
@@ -135,6 +134,9 @@ public final class ConfigurationSerializableLocation implements ConfigurationSer
             if (world == null) {
                 Logger.getLogger(this.getClass().getName()).warning("World UUID not found, falling back to World Name");
                 world = Bukkit.getWorld(this.world);
+            }
+            if (world == null) {
+                throw new IllegalStateException("Cannot find world by UUID or name");
             }
             weakLoc = new WeakReference<Location>(new Location(world, x, y, z, yaw, pitch));
         }
